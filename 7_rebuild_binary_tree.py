@@ -1,3 +1,7 @@
+"""
+
+"""
+
 class Node():
     def __init__(self,item=None):
         self.item=item
@@ -52,7 +56,7 @@ class Tree():
 def rebuild_btree(preorder,inorder,root):
 
     if (not preorder) or (not inorder):
-        return None
+          return None
     if not root.item:
         root.item=preorder[0]
     # print(root)
