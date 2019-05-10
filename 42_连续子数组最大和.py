@@ -28,7 +28,6 @@ def max_i(nums_list,i):
     else:
        return max_i(nums_list,i-1)+nums_list[i]
 
-
 def max_sub_sum_rec(nums_list):
      return max([max_i(nums_list,i)  for i in range(len(nums_list))])
 
