@@ -5,17 +5,29 @@
 // 积是多少？例如当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此
 // 时得到最大的乘积18。
 """
-
-def max_length(n):
-    if n < 2:
+#参考修改https://www.cnblogs.com/qflyue/p/8535507.html
+def rope_cut(length):
+    # 最优解数组，第一个值0代表没绳子没有长度时候很定是0，代表长度为n的绳子剪开后乘积的最大值和i中较大的值，比如，n=3，而rope_cut(3)=2,所以最优值是3
+    #因为(a/2)^2>=a的解是a>=4,所以需要提前计算出长度小于4的值。
+    li=[0]
+    if length<2:
+        return '绳子长度小于2'
+    if length==2:#当长度为2时，返回2
         return 1
-    if n==2:
-        return 1
-    if n==3:
+    if length==3:#当长度为3时，返回2，虽然最优解数组里为3，但是每次必须得切一刀，这样1*2=2，所以长度为3时还是2
         return 2
 
-    return max([ max_length(i)*max_length(n-i) for i in range(1,n)])
-
+    for j in range(1,length+1):
+        max = j
+        for i in range(1,j):
+            # 思路：每次求解值时将其他小于需要求解的长度是都列出来放在一个数组里
+            #如：求长度为5，最优解数组里必须得有长度为1,2,3,4的最优解值
+            #注：此处使用列表保存最优解数组是为了性能优化，虽然递归求解也能解出，但会造成大量重复执行
+            temp=li[i]*li[j-i]
+            if temp>max:
+                max=temp
+        li.append(max)#每次将上次所得最优解追加在列表里
+    return li[-1]
 if __name__ == '__main__':
-    res=max_length(4)
+    res=rope_cut(3)
     print(res)
