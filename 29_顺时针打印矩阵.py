@@ -1,6 +1,7 @@
 from numpy import *
 
 num_array=array([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20]])
+# num_array=array([[1,2,3],[4,5,6],[7,8,9]])
 # print(array.size)
 
 def print_matrix(num_array,row,columns,start):
@@ -15,7 +16,7 @@ def print_matrix(num_array,row,columns,start):
         for i in range(end_x-2,start-1,-1):
             print(num_array[end_y-1][i])
     if start<end_x and start<end_y-1:
-        for i in range(end_x-1,start,-1):
+        for i in range(end_y-2,start,-1):
             print(num_array[i][start])
 def matrix_clockwise(num_array):
     row=num_array.shape[0]
